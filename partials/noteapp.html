@@ -1,0 +1,24 @@
+<herocomponent></herocomponent>
+<section>
+    <div class="container">
+        <div class="col-sm-4" *ngFor="let note of notes">
+            <div (click)="showNote(note.id)" class="notebox">
+                <h2 *ngIf="note.id==openNote" contenteditable [(modelContent)]="note.title" (modelContentChange)="inputChanged()"></h2>
+                <h2 *ngIf="note.id!=openNote">{{note.title}}</h2>
+                <p *ngIf="note.id==openNote" contenteditable [(modelContent)]="note.description" (modelContentChange)="inputChanged()" [textContent]="note.description"></p>
+                <button class="upd" *ngIf="note.id==openNote&&changed" (click)="updatePost(note.id)">Update</button>
+                <button class="del" *ngIf="note.id==openNote" (click)="deletePost(note.id)">Delete</button>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="notebox" (click)="showNote(9999)">
+                <h2><i class="fa fa-plus fa-5" aria-hidden="true"></i></h2>
+                <h2 *ngIf="openNote==9999" class="inputfield" contenteditable [(modelContent)]="newNote.title" (modelContentChange)="inputChanged()">Title</h2>
+                <p *ngIf="openNote==9999" class="inputfield" contenteditable [(modelContent)]="newNote.description" (modelContentChange)="inputChanged()">Description</p>
+                <button *ngIf="openNote==9999" class="save" (click)="savePost()">Save</button>
+            </div>
+        </div>
+    </div>
+</section>
